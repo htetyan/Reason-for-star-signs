@@ -28,15 +28,17 @@ include jQuery, Moment.js and Date Range Picker's files
 <p>To see the reasons for your star signs, choose your date of birth:
 </p>
 <input type="text" name="birthday" value="10/24/1995" />
-
+<button class="Btn">
+   SHOW ME BELOW
+   </button>
 <div style="color: green;" class="result"></div>
 <h3>
 Click on the above button to check for reasons.
 </h3>
 <script>
 
-   let yearPicked = "";
-   let monthPicked = "";
+   let yearPicked = "1995";
+   let monthPicked = "10";
 
 //Date picker code:
 
@@ -51,34 +53,35 @@ $(function() {
     //var years = moment().diff(start, 'years');
     //alert("You are " + years + " years old!");
 
-    //Output of chosen date picked
-    //alert(end.format('YYYY-MM-DD'));
+    //Output of chosen year and month picked
+     yearPicked = end.format('YYYY');
+     monthPicked = end.format('MM');
+    //monthPicked = Number(monthPicked);
+    //alert(monthPicked);
     });
 });
 
 let resEle = document.querySelector(".result");
 
   function randMessage(){
-    const years =[2020, 2019, 2018, 2017, 2016 , 2015, 2014 ,2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980, 1979, 1978, 1977, 1976, 1975, 1974, 1973, 1972, 1971, 1970, 1969, 1968, 1967, 1966, 1965, 1964, 1963, 1962]
 
-    const months = ['December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    const constellations = ['Sagittarius', 'Capricornus', 'Aquarius', 'Pisces', 'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', ' Scorpius or Ophiuchus']
+    const constellations = ['Capricornus', 'Aquarius', 'Pisces', 'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', ' Scorpius / Ophiuchus', 'Sagittarius']
 
-    const val = Math.floor(Math.random()* 12)
-    const num = Math.floor(Math.random()* 59)
+    const val = Number(monthPicked);
+    //console.log(val);
+   
+    let randmonth = months.filter(month => month === months[val-1]);
 
-    let randYear = years.filter(year => year === years[num]);
-    let randmonth = months.filter(month => month === months[val]);
-
-    let randconstellation = constellations.filter(constellation => constellation === constellations[val]);
+    let randconstellation = constellations.filter(constellation => constellation === constellations[val-1]);
 
 
-    return `At the time of your birth in ${randmonth} ${randYear}, approximately ${2021 - randYear} years ago, the Sun was inside of the constellation of ${randconstellation}. The occurrence of this very spectacular event, caused you to be a ${randconstellation}.`
+    return `At the time of your birth in ${randmonth} ${yearPicked}, approximately ${2021 - yearPicked} years ago, the Sun was inside of the constellation of ${randconstellation}. The occurrence of this very spectacular event, caused you to be a ${randconstellation}.`
     };
     document.querySelector(".Btn").addEventListener("click", () => {
          resEle.innerHTML = randMessage();
-      });
+     });
 
 </script>
 </body>
